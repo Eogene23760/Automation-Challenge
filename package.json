@@ -1,0 +1,33 @@
+{
+  "name": "rumah123-automation-challenge",
+  "version": "1.0.0",
+  "description": "Mobile automation for 99 app homepage revamp - WebdriverIO + Appium + Cucumber (Gherkin) + Page Object Model (CommonJS)",
+  "type": "commonjs",
+  "scripts": {
+    "test": "wdio run ./wdio.conf.js",
+    "appium": "appium",
+    "appium:doctor": "appium driver doctor uiautomator2",
+    "appium:install-driver": "appium driver install uiautomator2"
+  },
+  "keywords": [
+    "appium",
+    "webdriverio",
+    "cucumber",
+    "gherkin",
+    "page-object-model",
+    "mobile-automation"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@wdio/appium-service": "^9.0.0",
+    "@wdio/cli": "^9.0.0",
+    "@wdio/cucumber-framework": "^9.0.0",
+    "@wdio/local-runner": "^9.0.0",
+    "@wdio/spec-reporter": "^9.0.0"
+  },
+  "dependencies": {
+    "appium": "^3.0.0",
+    "appium-uiautomator2-driver": "^8.0.0"
+  }
+}
