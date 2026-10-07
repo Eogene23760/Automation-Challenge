@@ -30,11 +30,11 @@ Then('I should see the bottom navigation tabs', async () => {
   expect(akun).toBe(true);
 });
 
-When('I select the {string} tab', async (tab) => {
+When(/^I select the "([^"]*)" tab$/, async (tab) => {
   await HomePage.selectTab(tab);
 });
 
-Then('the {string} tab should be active', async (tab) => {
+Then(/^the "([^"]*)" tab should be active$/, async (tab) => {
   // Setelah tap tab, verifikasi tab tsb masih ada/terpilih di layar.
   const map = {
     Cari: HomePage.tabCari,
