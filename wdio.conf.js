@@ -34,7 +34,7 @@ exports.config = {
   // ---------------------------------------------------------------
   // Test files (Gherkin feature files)
   // ---------------------------------------------------------------
-  specs: ['./test/features/**/*.feature'],
+  specs: [path.join(__dirname, 'test', 'features', '*.feature')],
   exclude: [],
 
   maxInstances: 1,
@@ -73,7 +73,8 @@ exports.config = {
   reporters: ['spec'],
 
   cucumberOpts: {
-    require: ['./test/step-definitions/**/*.js'],
+    // Path absolut agar glob tetap cocok di Windows (path bisa mengandung spasi).
+    require: [path.join(__dirname, 'test', 'step-definitions', 'homepage.steps.js')],
     backtrace: false,
     requireModule: [],
     dryRun: false,
