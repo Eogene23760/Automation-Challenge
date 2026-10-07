@@ -9,7 +9,9 @@ const HomePage = require('../pageobjects/home.page');
 
 Given('I open the 99 app', async () => {
   // App di-launch otomatis oleh capabilities appPackage/appActivity saat session mulai.
-  // Pastikan homepage (search bar) sudah tampil sebelum lanjut.
+  // Karena noReset=true, state dari skenario sebelumnya bisa tersisa (mis. masih di tab lain),
+  // jadi pastikan kita kembali ke homepage: kalau search bar belum tampil, tap tab "Cari".
+  await HomePage.ensureOnHomePage();
   await HomePage.waitForDisplayed(HomePage.searchBar);
 });
 

@@ -50,6 +50,15 @@ class HomePage extends BasePage {
     return searchVisible && tabVisible;
   }
 
+  // Kembali ke homepage kalau sedang berada di tab lain.
+  // Dipakai agar tiap skenario independen meski app tidak di-reset (noReset=true).
+  async ensureOnHomePage() {
+    const onHome = await this.isDisplayed(this.searchBar, 3000);
+    if (!onHome) {
+      await this.click(this.tabCari);
+    }
+  }
+
   // ---- ACTIONS ----
 
   async tapSearchBar() {
