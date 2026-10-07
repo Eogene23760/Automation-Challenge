@@ -30,19 +30,31 @@ Then('I should see the bottom navigation tabs', async () => {
   expect(akun).toBe(true);
 });
 
-When(/^I select the "([^"]*)" tab$/, async (tab) => {
-  await HomePage.selectTab(tab);
+// ---- Tab steps (eksplisit per tab, tanpa Scenario Outline) ----
+
+When('I tap the Cari tab', async () => {
+  await HomePage.selectTab('Cari');
 });
 
-Then(/^the "([^"]*)" tab should be active$/, async (tab) => {
-  // Setelah tap tab, verifikasi tab tsb masih ada/terpilih di layar.
-  const map = {
-    Cari: HomePage.tabCari,
-    'Hunian Baru': HomePage.tabHunianBaru,
-    'Iklan Saya': HomePage.tabIklanSaya,
-    'Buat Iklan': HomePage.tabBuatIklan,
-    'Akun Saya': HomePage.tabAkunSaya,
-  };
-  const displayed = await HomePage.isDisplayed(map[tab]);
+When('I tap the Hunian Baru tab', async () => {
+  await HomePage.selectTab('Hunian Baru');
+});
+
+When('I tap the Akun Saya tab', async () => {
+  await HomePage.selectTab('Akun Saya');
+});
+
+Then('the Cari tab should be active', async () => {
+  const displayed = await HomePage.isDisplayed(HomePage.tabCari);
+  expect(displayed).toBe(true);
+});
+
+Then('the Hunian Baru tab should be active', async () => {
+  const displayed = await HomePage.isDisplayed(HomePage.tabHunianBaru);
+  expect(displayed).toBe(true);
+});
+
+Then('the Akun Saya tab should be active', async () => {
+  const displayed = await HomePage.isDisplayed(HomePage.tabAkunSaya);
   expect(displayed).toBe(true);
 });

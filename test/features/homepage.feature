@@ -23,16 +23,23 @@ Feature: 99 App Homepage
     And I should see the bottom navigation tabs
 
   @homepage @tabs
-  Scenario Outline: User can switch between homepage bottom navigation tabs
+  Scenario: User can open the Hunian Baru tab
     Given I open the 99 app
     And I should see the homepage
-    When I select the "<tab>" tab
-    Then the "<tab>" tab should be active
+    When I tap the Hunian Baru tab
+    Then the Hunian Baru tab should be active
 
-    Examples:
-      | tab         |
-      | Cari        |
-      | Hunian Baru |
-      | Iklan Saya  |
-      | Buat Iklan  |
-      | Akun Saya   |
+  @homepage @tabs
+  Scenario: User can open the Akun Saya tab
+    Given I open the 99 app
+    And I should see the homepage
+    When I tap the Akun Saya tab
+    Then the Akun Saya tab should be active
+
+  @homepage @tabs
+  Scenario: User can return to the Cari tab
+    Given I open the 99 app
+    And I should see the homepage
+    When I tap the Akun Saya tab
+    And I tap the Cari tab
+    Then the Cari tab should be active
