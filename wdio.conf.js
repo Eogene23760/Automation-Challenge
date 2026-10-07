@@ -48,11 +48,13 @@ exports.config = {
       'appium:automationName': 'UiAutomator2',
       'appium:deviceName': 'Android Emulator', // ganti dgn nama device: `adb devices`
       // 'appium:platformVersion': '13',        // sesuaikan versi Android device
-      'appium:app': path.join(process.cwd(), 'apps', '99.apk'), // taruh apk di ./apps/99.apk
-      // Jika app sudah terinstall, pakai 2 baris di bawah & hapus 'appium:app':
-      // 'appium:appPackage': 'com.ninetyNine.property', // TODO: isi package app 99 yang asli
-      // 'appium:appActivity': '.MainActivity',          // TODO: isi activity app 99 yang asli
-      'appium:noReset': false,
+      // --- OPSI A: app di-install dari Google Play (sudah terpasang di emulator) ---
+      // Isi dengan hasil: adb shell dumpsys window | findstr "mCurrentFocus"
+      'appium:appPackage': 'com.urbanindo.android', // app 99 (99 Group / 99.co)
+      'appium:appActivity': 'app.nine_nine.MainActivity', // homepage activity
+      // --- (OPSI B pakai file apk) kalau pakai apk, hapus 2 baris di atas & aktifkan baris ini: ---
+      // 'appium:app': path.join(process.cwd(), 'apps', '99.apk'),
+      'appium:noReset': true, // true = app tidak di-reset tiap run (cocok utk app dari Play Store)
       'appium:newCommandTimeout': 240,
       'appium:autoGrantPermissions': true,
     },

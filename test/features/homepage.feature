@@ -1,5 +1,5 @@
 # =====================================================================
-# Feature: Homepage 99 app (bagian revamp)
+# Feature: Homepage 99 app (bagian revamp) - versi Indonesia (com.urbanindo.android)
 # Mengacu pada README:
 #   1. Open the app
 #   2. Once it's open, you will see the homepage
@@ -20,17 +20,19 @@ Feature: 99 App Homepage
     Given I open the 99 app
     Then I should see the homepage
     And I should see the search bar
-    And I should see the promo banner
+    And I should see the bottom navigation tabs
 
   @homepage @tabs
-  Scenario Outline: User can switch between homepage tabs
+  Scenario Outline: User can switch between homepage bottom navigation tabs
     Given I open the 99 app
     And I should see the homepage
     When I select the "<tab>" tab
-    Then the "<tab>" tab content should be displayed
+    Then the "<tab>" tab should be active
 
     Examples:
-      | tab        |
-      | Buy        |
-      | Rent       |
-      | New Launch |
+      | tab         |
+      | Cari        |
+      | Hunian Baru |
+      | Iklan Saya  |
+      | Buat Iklan  |
+      | Akun Saya   |

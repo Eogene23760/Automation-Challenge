@@ -1,73 +1,71 @@
 // =====================================================================
-// HomePage - Page Object untuk homepage app 99 (bagian revamp)
+// HomePage - Page Object untuk homepage app 99 (com.urbanindo.android)
 // CommonJS
 //
-// PENTING: Locator di bawah adalah PLACEHOLDER.
-// Gunakan Appium Inspector untuk scan locator ASLI dari app 99,
-// lalu ganti nilai selector-nya. Prioritas selector (paling stabil
-// ke paling rapuh):
-//   1. accessibility id  -> '~someAccessibilityId'
-//   2. resource-id        -> 'android=new UiSelector().resourceId("com.app:id/xxx")'
-//   3. text               -> 'android=new UiSelector().text("Buy")'
-//   4. xpath (hindari jika bisa)
+// Locator diambil langsung dari Appium Inspector (accessibility id / content-desc).
+// Tanda '~' pada selector = accessibility id (content-desc di Android).
 // =====================================================================
 
 const BasePage = require('./base.page');
 
 class HomePage extends BasePage {
-  // ---- LOCATORS (TODO: ganti dengan locator asli dari Appium Inspector) ----
-
-  // Container utama homepage (penanda halaman sudah terbuka)
-  get homeContainer() {
-    return $('~home_container'); // TODO
-  }
+  // ---- LOCATORS (dari Appium Inspector) ----
 
   // Search bar di bagian atas homepage
   get searchBar() {
-    return $('~home_search_bar'); // TODO
+    return $('~Lokasi, area, project');
   }
 
-  // Tab/segment hasil revamp (contoh: Buy / Rent / New Launch)
-  get tabBuy() {
-    return $('android=new UiSelector().text("Buy")'); // TODO
+  // Tombol Filter di samping search bar
+  get filterButton() {
+    return $('~Filter');
   }
 
-  get tabRent() {
-    return $('android=new UiSelector().text("Rent")'); // TODO
+  // Bottom navigation tabs (content-desc diakhiri "\nTab X of 5")
+  get tabCari() {
+    return $('~Cari\nTab 1 of 5');
   }
 
-  get tabNewLaunch() {
-    return $('android=new UiSelector().text("New Launch")'); // TODO
+  get tabHunianBaru() {
+    return $('~Hunian Baru\nTab 2 of 5');
   }
 
-  // Banner / carousel promosi di homepage
-  get promoBanner() {
-    return $('~home_promo_banner'); // TODO
+  get tabIklanSaya() {
+    return $('~Iklan Saya\nTab 3 of 5');
   }
 
-  // Bottom navigation
-  get bottomNavHome() {
-    return $('~nav_home'); // TODO
+  get tabBuatIklan() {
+    return $('~Buat Iklan\nTab 4 of 5');
+  }
+
+  get tabAkunSaya() {
+    return $('~Akun Saya\nTab 5 of 5');
+  }
+
+  // Penanda halaman homepage sudah terbuka:
+  // search bar + tab "Cari" aktif adalah indikator kuat kita di homepage.
+  async isHomePageDisplayed() {
+    const searchVisible = await this.isDisplayed(this.searchBar);
+    const tabVisible = await this.isDisplayed(this.tabCari);
+    return searchVisible && tabVisible;
   }
 
   // ---- ACTIONS ----
-
-  /**
-   * Memastikan homepage sudah terbuka (dipakai di step "once it's open you will see the homepage").
-   */
-  async isHomePageDisplayed() {
-    return this.isDisplayed(this.homeContainer);
-  }
 
   async tapSearchBar() {
     await this.click(this.searchBar);
   }
 
+  /**
+   * Pilih tab bottom nav berdasarkan nama.
+   */
   async selectTab(tabName) {
     const map = {
-      Buy: this.tabBuy,
-      Rent: this.tabRent,
-      'New Launch': this.tabNewLaunch,
+      Cari: this.tabCari,
+      'Hunian Baru': this.tabHunianBaru,
+      'Iklan Saya': this.tabIklanSaya,
+      'Buat Iklan': this.tabBuatIklan,
+      'Akun Saya': this.tabAkunSaya,
     };
     const element = map[tabName];
     if (!element) {
